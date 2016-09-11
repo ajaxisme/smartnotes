@@ -3,6 +3,7 @@ from topia.termextract import extract
 from pprint import pprint
 
 def get_matching_lines(text, term):
+    text = text.lower()
     lines = parse_text(text)
     matching_lines = []
     for line in lines:
@@ -14,9 +15,12 @@ def get_matching_lines(text, term):
 def parse_text(text):
     terms = get_terms(text)
     only_terms = []
+    bterms = ['the', 'and', 'so', 'hence', 'analysis', 'approach'  ,  'area' ,   'assessment' , 'assume' , 'authority' ,  'available' ,  'benefit' ,'concept' ,'consistent' ,'constitutional' ,  'context', 'contract'  ,  'create',  'data'  ,  'definition' , 'derived', 'distribution' ,   'economic'   , 'environment', 'established', 'estimate' ,   'evidence',   'export' , 'factor'  ,'financial' ,  'formula', 'function'  ,  'identified' , 'income' , 'indicate' ,'individual' ,  'involved' ,   'issue'  , 'labour' , 'legal'  , 'legislation' ,'major'  , 'method'  ,'occur'  , 'percent', 'period'  ,'policy' , 'principle'  , 'procedure'  , 'process' ,'required'   , 'research'   , 'response'  ,  'role'  ,  'section', 'sector', 'significant' , 'similar' ,'source' , 'specific',    'structure'  , 'theory', 'variable']
     for term in terms:
         if len(term[0]) > 2: #Reject single/double character terms
-            only_terms.append(term[0])
+            for bterm in bterms:
+                if bterm != term[0]:
+                    only_terms.append(term[0])
 
     #pprint(only_terms)
     shortened_text = []

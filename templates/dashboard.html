@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SmartNotes - Home</title>
+    <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.1.2/css/bulma.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:500" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet"/>
+
+
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    
+    <script>
+    $( function() {
+      function log( message ) {
+        console.log(message);
+        $( "<div contenteditable='true'>" ).text( message ).prependTo( "#log" );
+        $( "#log" ).scrollTop( 0 );
+      }
+
+      $( "#phrase" ).autocomplete({
+        source: function( request, response ) {
+          $.ajax( {
+            url: "http://localhost:8000/suggestions",
+            dataType: "jsonp",
+            data: {
+              q: request.term
+            },
+            success: function( data ) {
+              //console.log('success');
+              // Handle 'no match' indicated by [ "" ] response
+              response( data.length === 1 && data[ 0 ].length === 0 ? [] : data );
+            }
+          } );
+        },
+        minLength: 3,
+        select: function( event, ui ) {
+          log( '- ' + ui.item.label );
+          // $("#phrase").text = "";
+        }
+      } );
+    } );
+    </script>
+
+    <script>
+    $(function() {
+      $('#addTranscript').click(function() {
+          var pass = $('#transcript').val();
+          $.ajax({
+              url: '/addTranscript',
+              data: $('form').serialize(),
+              type: 'POST',
+              success: function(response) {
+                  console.log(response);
+              },
+              error: function(error) {
+                  console.log(error);
+              }
+          });
+      });
+    });
+    </script>
+  </head>
+  <body>
+  <div id="head_container">
+      <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <a class="navbar-brand"><img class="img img-responsive" src="../static/smartnotes-logo.png"></a>
+          </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="navbar-collapse pull-right">
+    <span class="icon"><a href="upload.html"><i style="font-size:60px; padding-top:22px;" class="fa fa-plus-square-o fa-5x"></i></a></span>    
+  </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+  </div>
+
+<div class="container">
+<!-- <div class="tabs is-centered">
+
+</div> -->
+      <h2 class = "headers-form">Your Projects</h2>
+        <div class="card is-fullwidth outlines">
+          <header class="card-header">
+              <p class="card-header-title">
+                Quantum Mechanics
+              </p>
+              <a class="card-header-icon">
+                <i class="fa fa-edit"></i>
+              </a>
+            </header>
+            <div class="card-content">
+              <div class="content">
+                A fundamental branch of physics concerned with processes involving, for example, atoms and photons. Quantum mechanics gradually arose from Max Planck's solution in 1900 to the black-body...
+              </div>
+            </div>
+            <footer class="card-footer">
+              <small>11:09 PM - 10 September 2016</small>
+            </footer>
+          </div>
+
+            <br>
+
+                 <div class="card is-fullwidth outlines">
+          <header class="card-header">
+              <p class="card-header-title">
+Washington Irving              </p>
+              <a class="card-header-icon">
+                <i class="fa fa-edit"></i>
+              </a>
+            </header>
+            <div class="card-content">
+              <div class="content">
+                He made his literary debut in 1802 with a series of observational letters to the Morning Chronicle, written under the pseudonym Jonathan Oldstyle. After moving to England for the family business in 1815, he achieved...
+              </div>
+            </div>
+            <footer class="card-footer">
+              <small>11:09 PM - 10 September 2016</small>
+            </footer>
+          </div>
+
+<br>
+                 <div class="card is-fullwidth outlines">
+          <header class="card-header">
+              <p class="card-header-title">
+William Shakespeare              </p>
+              <a class="card-header-icon">
+                <i class="fa fa-edit"></i>
+              </a>
+            </header>
+            <div class="card-content">
+              <div class="content">
+                An English poet, playwright, and actor, widely regarded as the greatest writer in the English language and the world's pre-eminent dramatist. Many of his plays were published in editions of varying quality and accuracy during his lifetime. In 1623...
+              </div>
+            </div>
+            <footer class="card-footer">
+              <small>11:09 PM - 10 September 2016</small>
+            </footer>
+          </div>
+<br>
+          <br>
+        
+      </div>
+    </div>
+
+
+
+
+
+  </body>
+</html>

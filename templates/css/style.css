@@ -1,0 +1,64 @@
+html, body {
+      background-color: #555;
+      padding: 20px;
+      color: #fff;
+    }
+
+    img {
+      display: block;
+      margin: 0 auto;
+      padding-bottom: 15px;
+
+    }
+
+    .title {
+      text-align: center;
+      color:#fff;
+      padding-top: 10px;
+    }
+
+    .headers-form {
+      color: #fff;
+      padding-top: 10px;
+      font-size: 3em;
+      padding-bottom: 15px;
+      font-family: 'Raleway', sans-serif;
+    }
+
+    h2.headers-form-sub {
+      color: #fff;
+      padding-top: 10px;
+      font-size: 18px;
+      padding-bottom: 15px;
+      font-family: 'Raleway', sans-serif;
+    }
+
+
+    #addTranscript {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      font-family: 'Raleway', sans-serif;
+
+    }
+
+    a {
+      color: #fff !important;
+      text-decoration: none !important;
+    }
+    .ui-autocomplete-loading {
+      background: white right center no-repeat;
+    }
+    #phrase { width: 25em; }
+    nav{
+      padding:1em !important;
+      line-height: 5em ;
+    }
+    .outlines{
+      background-color: #bfbfbf;
+      color: #555;
+      font-family: 'Roboto Slab', serif;
+      font-size: 1em;
+    }
+    #transcript{
+      height: 20em;
+    }
