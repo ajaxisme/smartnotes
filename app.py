@@ -10,6 +10,7 @@ def home():
 @app.route('/addTranscript', methods=['POST'])
 def addTranscript():
    text = request.form['transcript']
+   text = text.encode('ascii', 'ignore')
    with open('api/sample', 'w') as f:
        f.write(text)
    return redirect(url_for('home'))

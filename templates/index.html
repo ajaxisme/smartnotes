@@ -6,6 +6,7 @@
     <title>SmartNotes</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.1.2/css/bulma.css" />
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
@@ -13,10 +14,62 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <style>
+    html, body {
+      background-color: #555;
+      padding: 20px;
+      color: #fff;
+    }
+
+    img {
+      display: block;
+      margin: 0 auto;
+      padding-bottom: 15px;
+
+    }
+
+    h2.title {
+      text-align: center;
+      color:#fff;
+      padding-top: 10px;
+    }
+
+    h2.headers-form {
+      color: #fff;
+      padding-top: 10px;
+      font-size: 24px;
+      padding-bottom: 15px;
+    }
+
+    h2.headers-form-sub {
+      color: #fff;
+      padding-top: 10px;
+      font-size: 18px;
+      padding-bottom: 15px;
+    }
+
+
+    .b1 {
+      margin-top: 10px;
+      margin-bottom: 10px;
+
+    }
+
+    a {
+      color: #fff !important;
+      text-decoration: none !important;
+    }
     .ui-autocomplete-loading {
-      background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat;
+      background: white right center no-repeat;
     }
     #phrase { width: 25em; }
+
+
+
+
+
+
+
+
     </style>
 
     <script>
@@ -72,31 +125,51 @@
   </head>
   <body>
 
-    <h1>Smart Notes </h1>
-    <div>
-      <h3>Enter transcript</h3>
-      <form name="form">
-        <input class="form-control col-xs-12" name="transcript" id="transcript" />
-        <button id="addTranscript" class="btn-danger">Submit</button>
-      </form>
-    </div>
-    <div>
+    <img src="/static/smartnotes-logo.png">
+    <h2 class = "title">take notes, <b>smarter.</b><h2>
 
-        <h2>Notes</h2>
-        <label>Title</label>
-        <input class="input-text" type="text" id="title" />
+<div class="tabs is-centered">
+  <ul>
+    <li><a>Home</a></li>
+    <li><a>Notes</a></li>
+    <li><a>Log In</a></li>
+  </ul>
+</div>
+
+
+
+
+
+      <h2 class = "headers-form">Get Started in Three Steps:</h2>
+      <h2 class = "headers-form-sub">1.) Enter text/transcripts from course videos, article, data, etc --></h2>
+      <form name="form">
+        <textarea class="textarea" placeholder="enter your transcript:" name="transcript" id="transcript"></textarea>
+        <button class="button is-danger b1" id="addTranscript">Submit</button>
+      </form>
+
+
+        <h2 class = "headers-form-sub">2.) Add your title:</h2>
+
+        <input class="input" type="text" placeholder="insert title" id="title"/>
 
         <div class="ui-widget">
-          <h2>Start typing </h2>
-          <input id="phrase" class="form-control" type="text">
+          <h2 class="headers-form-sub">3.) Start searching for keywords & click enter to add to your notes! </h2>
+         <!-- <input class="input" id="phrase" class="form-control" placeholder="search for keywords" type="text"> -->
+         <input id="phrase" class="form-control" type="text">
         </div>
+
+
+        <h2 class="headers-form-sub">Lastly, export your notes as a pdf here, or use data visualization to see what keywords you used!</h2>
 
         <div class="ui-widget" style="margin-top:2em; font-family:Arial">
         <!-- <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content form-control"></div> -->
-        <input type="text" id="hidden_text" hidden="true" />
+
         <div id="log" class="ui-widget-content"></div>
       </div>
     </div>
+
+
+
 
 
   </body>
