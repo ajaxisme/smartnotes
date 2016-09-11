@@ -1,0 +1,43 @@
+#!//anaconda/bin/python
+from topia.termextract import extract
+from pprint import pprint
+
+def get_matching_lines(text, term):
+    lines = parse_text(text)
+    matching_lines = []
+    for line in lines:
+        if term in line:
+            matching_lines.append(line)
+
+    return set(matching_lines)
+
+def parse_text(text):
+    terms = get_terms(text)
+    only_terms = []
+    for term in terms:
+        if len(term[0]) > 2: #Reject single/double character terms
+            only_terms.append(term[0])
+
+    #pprint(only_terms)
+    shortened_text = []
+    for line in text.split('.'):
+        for term in only_terms:
+            if term in line:
+                shortened_text.append(line)
+    return set(shortened_text)
+
+def get_terms(text):
+    extractor = extract.TermExtractor()
+    terms = extractor(text)
+    return terms
+
+if __name__ == "__main__":
+    text = ''
+    with open('sample2') as f:
+        text = f.read()
+    shortened_text = parse_text(text)
+    while(1):
+        keyw = raw_input('Enter phrase: ')
+        for text in shortened_text:
+            if keyw in text[1]:
+                print text

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SmartNotes</title>
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <script type="text/javascript" src="{{ url_for('static', filename='main.js')}}" /> -->
+  </head>
+  <body>
+    <h1>Smart Notes</h1>
+    <form name="form">
+      <input type="text" name="phrase" id="phrase_box" onkeyup="suggest_lines()"/>
+    </form>
+
+    <script type="text/javascript">
+      function suggest_lines() {
+        console.log('Hello');
+      }
+    </script>
+
+  </body>
+</html>
