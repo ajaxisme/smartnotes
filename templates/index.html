@@ -1,21 +1,103 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SmartNotes</title>
-    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- <script type="text/javascript" src="{{ url_for('static', filename='main.js')}}" /> -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+    .ui-autocomplete-loading {
+      background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat;
+    }
+    #phrase { width: 25em; }
+    </style>
+
+    <script>
+    $( function() {
+      function log( message ) {
+        console.log(message);
+        $( "<div contenteditable='true'>" ).text( message ).prependTo( "#log" );
+        $( "#log" ).scrollTop( 0 );
+      }
+
+      $( "#phrase" ).autocomplete({
+        source: function( request, response ) {
+          $.ajax( {
+            url: "http://localhost:8000/suggestions",
+            dataType: "jsonp",
+            data: {
+              q: request.term
+            },
+            success: function( data ) {
+              //console.log('success');
+              // Handle 'no match' indicated by [ "" ] response
+              response( data.length === 1 && data[ 0 ].length === 0 ? [] : data );
+            }
+          } );
+        },
+        minLength: 3,
+        select: function( event, ui ) {
+          log( '- ' + ui.item.label );
+          // $("#phrase").text = "";
+        }
+      } );
+    } );
+    </script>
+
+    <script>
+    $(function() {
+      $('#addTranscript').click(function() {
+          var pass = $('#transcript').val();
+          $.ajax({
+              url: '/addTranscript',
+              data: $('form').serialize(),
+              type: 'POST',
+              success: function(response) {
+                  console.log(response);
+              },
+              error: function(error) {
+                  console.log(error);
+              }
+          });
+      });
+    });
+    </script>
   </head>
   <body>
-    <h1>Smart Notes</h1>
-    <form name="form">
-      <input type="text" name="phrase" id="phrase_box" onkeyup="suggest_lines()"/>
-    </form>
 
-    <script type="text/javascript">
-      function suggest_lines() {
-        console.log('Hello');
-      }
-    </script>
+    <h1>Smart Notes </h1>
+    <div>
+      <h3>Enter transcript</h3>
+      <form name="form">
+        <input class="form-control col-xs-12" name="transcript" id="transcript" />
+        <button id="addTranscript" class="btn-danger">Submit</button>
+      </form>
+    </div>
+    <div>
+
+        <h2>Notes</h2>
+        <label>Title</label>
+        <input class="input-text" type="text" id="title" />
+
+        <div class="ui-widget">
+          <h2>Start typing </h2>
+          <input id="phrase" class="form-control" type="text">
+        </div>
+
+        <div class="ui-widget" style="margin-top:2em; font-family:Arial">
+        <!-- <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content form-control"></div> -->
+        <input type="text" id="hidden_text" hidden="true" />
+        <div id="log" class="ui-widget-content"></div>
+      </div>
+    </div>
+
 
   </body>
 </html>
